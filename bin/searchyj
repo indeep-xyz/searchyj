@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'searchyj'
+
+SearchYJ::CLI.start(ARGV)
