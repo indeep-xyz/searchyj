@@ -99,8 +99,11 @@ module SearchYJ
     #   for the next page is exist.
     #   Else false.
     def final_page?
-      anchor = @html.css('#Sp1 .m a').last
-      !(anchor.text.include?('次へ'))
+      a = @html.css('#Sp1 .m a').last
+
+      a.nil? ||
+        !(a.method_defined?(:text)) ||
+        !(a.text.include?('次へ'))
     end
 
     # Move to the next page.
