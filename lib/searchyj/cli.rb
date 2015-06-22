@@ -1,5 +1,6 @@
 require 'searchyj'
 require 'thor'
+require 'json'
 
 module SearchYJ
   class CLI < Thor
@@ -14,7 +15,9 @@ module SearchYJ
     def at_rank(term)
       rank = options[:rank]
 
-      p SearchYJ.at_rank(term, rank)
+      puts JSON.dump(
+          result = SearchYJ.at_rank(term, rank)
+      )
     end
 
     desc 'detect',
@@ -36,7 +39,9 @@ module SearchYJ
       key    = options[:key]
       regexp = Regexp.new(options[:regexp])
 
-      puts SearchYJ.detect(term, regexp, key)
+      puts JSON.dump(
+          SearchYJ.detect(term, regexp, key)
+      )
     end
 
     desc 'list',
@@ -56,7 +61,9 @@ module SearchYJ
       size = options[:size]
       from = options[:from]
 
-      puts SearchYJ.list(term, size, from)
+      puts JSON.dump(
+          SearchYJ.list(term, size, from)
+      )
     end
   end
 end
