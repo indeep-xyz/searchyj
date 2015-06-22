@@ -3,23 +3,18 @@ require 'thor'
 
 module SearchYJ
   class CLI < Thor
-    desc 'list',
-         'Get records of the search result.'
-    option :size,
-           type:    :numeric,
-           default: 10,
-           aliases: '-s',
-           desc:    'The size of the returner'
-    option :from,
-           type:    :numeric,
-           default: 1,
-           aliases: '-f',
-           desc:    'Start to search from this number of search ranking'
-    def list(term)
-      size = options[:size]
-      from = options[:from]
+    desc 'at_rank',
+         "Get a record in the search result\n" \
+         'at a particular rank order in the search ranking.'
+    option :rank,
+           type:     :numeric,
+           required: true,
+           aliases:  '-r',
+           desc:     'The rank order in the search ranking'
+    def at_rank(term)
+      rank = options[:rank]
 
-      puts SearchYJ.list(term, size, from)
+      p SearchYJ.at_rank(term, rank)
     end
 
     desc 'detect',
@@ -34,7 +29,9 @@ module SearchYJ
            type:    :string,
            default: 'title',
            aliases: '-k',
-           desc:    'The key name of a record for comparing'
+           desc: \
+               'The key name for comparing values. ' \
+               'You can pass any of \'title\' or \'uri\'. '
     def detect(term)
       key    = options[:key]
       regexp = Regexp.new(options[:regexp])
@@ -42,18 +39,24 @@ module SearchYJ
       puts SearchYJ.detect(term, regexp, key)
     end
 
-    desc 'at_rank',
-         "Get a record in the search result\n" \
-         'at a particular rank order of the search ranking.'
-    option :rank,
-           type:     :numeric,
-           required: true,
-           aliases:  '-r',
-           desc:     'The rank order of the search ranking'
-    def at_rank(term)
-      rank = options[:rank]
+    desc 'list',
+         'Get records of the search result.'
+    option :size,
+           type:    :numeric,
+           default: 10,
+           aliases: '-s',
+           desc:    'The size of the returner'
+    option :from,
+           type:    :numeric,
+           default: 1,
+           aliases: '-f',
+           desc: \
+               'Start to search from this number of the search ranking'
+    def list(term)
+      size = options[:size]
+      from = options[:from]
 
-      puts SearchYJ.at_rank(term, rank)
+      puts SearchYJ.list(term, size, from)
     end
   end
 end

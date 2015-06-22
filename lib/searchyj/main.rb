@@ -3,9 +3,9 @@ require 'searchyj/searcher'
 module SearchYJ
   class Main
     # Get a record in the search result
-    # at a particular rank order of the search ranking.
+    # at a particular rank order in the search ranking.
     # @param term [String]  Search term
-    # @param rank [Integer] The rank order of the search ranking
+    # @param rank [Integer] The rank order in the search ranking
     #
     # @return [Hash]
     #   A result record if matched the arguments
@@ -18,8 +18,8 @@ module SearchYJ
     # Detect a first record that
     # meet the conditions of a regexp and a key.
     # @param term   [String] Search term
-    # @param regexp [Regexp] Regexp that want to match with value of a record
-    # @param key    [Symbol] The key name of a record for comparing
+    # @param regexp [Regexp] Want to match with value of a record[key]
+    # @param key    [Symbol] The key name for comparing values
     #
     # @return [Hash]
     #   A result record if matched the arguments
@@ -42,7 +42,8 @@ module SearchYJ
     # Get records of the search result.
     # @param term [String]  Search term
     # @param size [Integer] The size of the returner
-    # @param from [Integer] Start to search from this number of search ranking
+    # @param from [Integer]
+    #   Start to search from this number of the search ranking
     #
     # @return [Array]
     #   Includes the result records
