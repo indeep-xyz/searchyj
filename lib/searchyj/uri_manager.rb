@@ -1,3 +1,5 @@
+require 'cgi'
+
 module SearchYJ
   #
   # Manage the URI instance
