@@ -41,9 +41,9 @@ It has parameters the followings.
 
 ### list
 
-    $ searchyj list [options] <SearchTerm>
+Print the search results that has collected the ordered number.
 
-Print search results in the form of JSON.
+    $ searchyj list [options] <SearchTerm>
 
 If the search result was nothing, print a string of an empty Array.
 
@@ -65,9 +65,9 @@ Start to search from this number of the search ranking.
 
 ### detect
 
-    $ searchyj detect [options] <SearchTerm>
+Print a record of the search result that has matched own arguments.
 
-Print a search result in the form of JSON.
+    $ searchyj detect [options] <SearchTerm>
 
 If the search result was nothing or did not find, print a string of null.
 
@@ -85,9 +85,9 @@ The default value is 'title'.
 
 ### at_rank
 
-    $ searchyj at_rank [options] <SearchTerm>
+Print a record of the search result at a particular rank order in the search ranking.
 
-Print a search result in the form of JSON.
+    $ searchyj at_rank [options] <SearchTerm>
 
 If the search result was nothing or did not find, print a string of null.
 
