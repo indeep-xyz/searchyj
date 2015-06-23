@@ -35,10 +35,10 @@ module SearchYJ
     #
     # @return [Array]
     #   Includes the result records
-    def list(term, size = 10, start_index = 1)
+    def list(term, size = 10, from = 1)
       searcher = Searcher.new
       searcher.uri.search_term = term
-      searcher.uri.index       = start_index
+      searcher.uri.index       = from
       searcher.pager.size      = size
       list = []
 
