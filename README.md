@@ -83,11 +83,11 @@ The key name for comparing values. You can pass any of 'title' or 'uri'.
 
 The default value is 'title'.
 
-### at_rank
+### rank
 
 Print a record of the search result at a particular rank order in the search ranking.
 
-    $ searchyj at_rank [options] <SearchTerm>
+    $ searchyj rank [options] <SearchTerm>
 
 If the search result was nothing or did not find, print a string of null.
 

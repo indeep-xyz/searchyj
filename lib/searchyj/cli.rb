@@ -4,7 +4,7 @@ require 'json'
 
 module SearchYJ
   class CLI < Thor
-    desc 'at_rank',
+    desc 'rank',
          "Get a record in the search result\n" \
          'at a particular rank order in the search ranking.'
     option :rank,
@@ -12,11 +12,11 @@ module SearchYJ
            required: true,
            aliases:  '-r',
            desc:     'The rank order in the search ranking'
-    def at_rank(term)
+    def rank(term)
       rank = options[:rank]
 
       puts JSON.dump(
-          result = SearchYJ.at_rank(term, rank)
+          result = SearchYJ.rank(term, rank)
       )
     end
 

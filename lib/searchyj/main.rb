@@ -10,7 +10,7 @@ module SearchYJ
     # @return [Hash]
     #   A result record if matched the arguments
     #   Else nil
-    def at_rank(term, rank)
+    def rank(term, rank)
       result = list(term, 1, rank)
       (result.size > 0) ? result[0] : nil
     end

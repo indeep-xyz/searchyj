@@ -78,11 +78,11 @@ gem 'searchyj'
 
 未設定時は 'title' となります。
 
-### at_rank
+### rank
 
 指定順位の検索結果を出力します。
 
-    $ searchyj at_rank [options] <SearchTerm>
+    $ searchyj rank [options] <SearchTerm>
 
 検索にひとつも引っかからない場合は文字列 null が出力されます。
 

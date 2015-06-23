@@ -10,9 +10,9 @@ module SearchYJ
     mgr.list(term, size, start_index)
   end
 
-  def at_rank(term, rank)
+  def rank(term, rank)
     mgr = SearchYJ::Main.new
-    mgr.at_rank(term, rank)
+    mgr.rank(term, rank)
   end
 
   def detect(term, regexp, key = :title)
