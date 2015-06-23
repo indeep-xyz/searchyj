@@ -29,6 +29,7 @@ module SearchYJ
 
       searcher = Searcher.new
       searcher.uri.search_term = term
+      searcher.pager.size      = 100
 
       searcher.run do |record|
         if regexp.match(record[key])
@@ -51,7 +52,7 @@ module SearchYJ
       searcher = Searcher.new
       searcher.uri.search_term = term
       searcher.uri.index       = start_index
-      searcher.page_size       = 10
+      searcher.pager.size      = size
       list = []
 
       searcher.run do |record|

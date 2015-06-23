@@ -2,6 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'searchyj/uri_manager'
 require 'searchyj/record_sorter'
+require 'searchyj/page_size_adjuster'
 
 module SearchYJ
   #
@@ -13,7 +14,13 @@ module SearchYJ
   #
   class Searcher
     attr_reader :results
-    attr_accessor :limit_loop, :user_agent, :sleep_time, :page_size, :uri
+    attr_accessor \
+        :pager, :uri, \
+        :limit_loop, :user_agent, :sleep_time
+
+    ENCODING   = 'UTF-8'
+    LIMIT_LOOP = 50
+    SLEEP_TIME = 1
     USER_AGENT = \
         'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0)' \
         'Gecko/20100101 Firefox/38.0'
@@ -22,16 +29,17 @@ module SearchYJ
 
     # Initialize myself.
     def initialize
+      @pager      = PageSizeAdjuster.new
       @uri        = UriManager.new
-      @limit_loop = 10
+      @encoding   = ENCODING
+      @limit_loop = LIMIT_LOOP
+      @sleep_time = SLEEP_TIME
       @user_agent = USER_AGENT
-      @sleep_time = 1
-      @page_size  = 10
     end
 
     def run(&block)
       loop_count = 0
-      sorter = RecordSorter.new(@uri.index, @page_size)
+      sorter = RecordSorter.new(@uri.index, @pager.size)
 
       while loop_count < @limit_loop
         fetch_html
@@ -79,6 +87,8 @@ module SearchYJ
           'User-Agent' => @user_agent
       }
 
+      params = @pager.merge_cookie(params)
+
       open(uri, params) do |f|
         fail OpenUriError unless f.status[0] == '200'
         f.read
@@ -89,7 +99,7 @@ module SearchYJ
     # and set the parsed HTML data to my own instance.
     def fetch_html
       raw_html = download_raw_html
-      @html = Nokogiri::HTML.parse(raw_html, nil, 'UTF-8')
+      @html = Nokogiri::HTML.parse(raw_html, nil, @encoding)
     end
 
     # Check whether or not the next page is exist.
