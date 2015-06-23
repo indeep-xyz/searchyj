@@ -87,7 +87,7 @@ module SearchYJ
           'User-Agent' => @user_agent
       }
 
-      params = @pager.merge_cookie(params)
+      params = @pager.attach_cookie(params)
 
       open(uri, params) do |f|
         fail OpenUriError unless f.status[0] == '200'

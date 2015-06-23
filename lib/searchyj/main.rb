@@ -2,19 +2,6 @@ require 'searchyj/searcher'
 
 module SearchYJ
   class Main
-    # Get a record in the search result
-    # at a particular rank order in the search ranking.
-    # @param term [String]  Search term
-    # @param rank [Integer] The rank order in the search ranking
-    #
-    # @return [Hash]
-    #   A result record if matched the arguments
-    #   Else nil
-    def rank(term, rank)
-      result = list(term, 1, rank)
-      (result.size > 0) ? result[0] : nil
-    end
-
     # Detect a first record that
     # meet the conditions of a regexp and a key.
     # @param term   [String] Search term
@@ -61,6 +48,19 @@ module SearchYJ
       end
 
       list
+    end
+
+    # Get a record in the search result
+    # at a particular rank order in the search ranking.
+    # @param term [String]  Search term
+    # @param rank [Integer] The rank order in the search ranking
+    #
+    # @return [Hash]
+    #   A result record if matched the arguments
+    #   Else nil
+    def rank(term, rank)
+      result = list(term, 1, rank)
+      (result.size > 0) ? result[0] : nil
     end
   end
 end

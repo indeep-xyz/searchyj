@@ -4,22 +4,6 @@ require 'json'
 
 module SearchYJ
   class CLI < Thor
-    desc 'rank',
-         "Get a record in the search result\n" \
-         'at a particular rank order in the search ranking.'
-    option :rank,
-           type:     :numeric,
-           required: true,
-           aliases:  '-r',
-           desc:     'The rank order in the search ranking'
-    def rank(term)
-      rank = options[:rank]
-
-      puts JSON.dump(
-          result = SearchYJ.rank(term, rank)
-      )
-    end
-
     desc 'detect',
          "Detect a first record that\n" \
          'meet the conditions of a regexp and a key.'
@@ -63,6 +47,22 @@ module SearchYJ
 
       puts JSON.dump(
           SearchYJ.list(term, size, from)
+      )
+    end
+
+    desc 'rank',
+         "Get a record in the search result\n" \
+         'at a particular rank order in the search ranking.'
+    option :rank,
+           type:     :numeric,
+           required: true,
+           aliases:  '-r',
+           desc:     'The rank order in the search ranking'
+    def rank(term)
+      rank = options[:rank]
+
+      puts JSON.dump(
+          SearchYJ.rank(term, rank)
       )
     end
   end
