@@ -46,7 +46,7 @@ module SearchYJ
       from = options[:from]
 
       puts JSON.dump(
-          SearchYJ.list(term, size, from)
+          SearchYJ.list(term, size, from: from)
       )
     end
 

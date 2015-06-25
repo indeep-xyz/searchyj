@@ -19,8 +19,6 @@ module SearchYJ
         :limit_loop, :user_agent, :sleep_time
 
     ENCODING   = 'UTF-8'
-    LIMIT_LOOP = 50
-    SLEEP_TIME = 1
     USER_AGENT = \
         'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0)' \
         'Gecko/20100101 Firefox/38.0'
@@ -28,13 +26,19 @@ module SearchYJ
     OpenUriError = Class.new(StandardError)
 
     # Initialize myself.
-    def initialize
+    def initialize(
+        encoding:   ENCODING,
+        from:       1,
+        sleep_time: 1,
+        limit_loop: 50,
+        user_agent: USER_AGENT)
       @pager      = PageSizeAdjuster.new
       @uri        = UriManager.new
-      @encoding   = ENCODING
-      @limit_loop = LIMIT_LOOP
-      @sleep_time = SLEEP_TIME
-      @user_agent = USER_AGENT
+      @uri.index  = from
+      @encoding   = encoding
+      @limit_loop = limit_loop
+      @sleep_time = sleep_time
+      @user_agent = user_agent
     end
 
     def run(&block)

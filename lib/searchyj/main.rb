@@ -11,10 +11,10 @@ module SearchYJ
     # @return [Hash]
     #   A result record if matched the arguments
     #   Else nil
-    def detect(term, regexp, key = :title)
+    def detect(term, regexp, key = :title, **args)
       key = key.to_sym unless key.is_a?(Symbol)
 
-      searcher = Searcher.new
+      searcher = Searcher.new(args)
       searcher.uri.search_term = term
       searcher.pager.size      = 100
 
@@ -35,10 +35,9 @@ module SearchYJ
     #
     # @return [Array]
     #   Includes the result records
-    def list(term, size = 10, from = 1)
-      searcher = Searcher.new
+    def list(term, size = 10, **args)
+      searcher = Searcher.new(args)
       searcher.uri.search_term = term
-      searcher.uri.index       = from
       searcher.pager.size      = size
       list = []
 
@@ -58,8 +57,9 @@ module SearchYJ
     # @return [Hash]
     #   A result record if matched the arguments
     #   Else nil
-    def rank(term, rank)
-      result = list(term, 1, rank)
+    def rank(term, rank, **args)
+      args[:from] = rank
+      result = list(term, 1, args)
       (result.size > 0) ? result[0] : nil
     end
   end

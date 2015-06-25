@@ -5,18 +5,18 @@ require "searchyj/cli"
 module SearchYJ
   module_function
 
-  def list(term, size = 10, start_index = 1)
+  def list(term, size = 10, **args)
     mgr = SearchYJ::Main.new
-    mgr.list(term, size, start_index)
+    mgr.list(term, size, args)
   end
 
-  def rank(term, rank)
+  def rank(term, rank, **args)
     mgr = SearchYJ::Main.new
-    mgr.rank(term, rank)
+    mgr.rank(term, rank, args)
   end
 
-  def detect(term, regexp, key = :title)
+  def detect(term, regexp, key = :title, **args)
     mgr = SearchYJ::Main.new
-    mgr.detect(term, regexp, key)
+    mgr.detect(term, regexp, key, args)
   end
 end
