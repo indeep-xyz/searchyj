@@ -4,6 +4,14 @@ require 'json'
 
 module SearchYJ
   class CLI < Thor
+    class_option \
+        :from,
+        type:    :numeric,
+        default: 1,
+        aliases: '-f',
+        desc: \
+            'Start to search from this number of the search ranking'
+
     desc 'detect',
          "Detect a first record that\n" \
          'meet the conditions of a regexp and a key.'
@@ -20,11 +28,12 @@ module SearchYJ
                'The key name for comparing values. ' \
                'You can pass any of \'title\' or \'uri\'. '
     def detect(term)
-      key    = options[:key]
-      regexp = Regexp.new(options[:regexp])
+      opt    = symbolized_options
+      key    = opt.delete(:key)
+      regexp = Regexp.new(opt.delete(:regexp))
 
       puts JSON.dump(
-          SearchYJ.detect(term, regexp, key)
+          SearchYJ.detect(term, regexp, key, opt)
       )
     end
 
@@ -35,18 +44,12 @@ module SearchYJ
            default: 10,
            aliases: '-s',
            desc:    'The size of the returner'
-    option :from,
-           type:    :numeric,
-           default: 1,
-           aliases: '-f',
-           desc: \
-               'Start to search from this number of the search ranking'
     def list(term)
-      size = options[:size]
-      from = options[:from]
+      opt  = symbolized_options
+      size = opt.delete(:size)
 
       puts JSON.dump(
-          SearchYJ.list(term, size, from: from)
+          SearchYJ.list(term, size, opt)
       )
     end
 
@@ -59,11 +62,20 @@ module SearchYJ
            aliases:  '-r',
            desc:     'The rank order in the search ranking'
     def rank(term)
-      rank = options[:rank]
+      opt  = symbolized_options
+      rank = opt.delete(:rank)
 
       puts JSON.dump(
-          SearchYJ.rank(term, rank)
+          SearchYJ.rank(term, rank, opt)
       )
+    end
+
+    private
+
+    def symbolized_options
+      options.map do |key, value|
+        [key.to_sym, value]
+      end.to_h
     end
   end
 end
