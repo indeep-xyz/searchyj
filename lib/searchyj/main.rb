@@ -30,8 +30,7 @@ module SearchYJ
     # Get records of the search result.
     # @param term [String]  Search term
     # @param size [Integer] The size of the returner
-    # @param from [Integer]
-    #   Start to search from this number of the search ranking
+    # @param args [Hash]
     #
     # @return [Array]
     #   Includes the result records

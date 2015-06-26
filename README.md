@@ -83,6 +83,11 @@ The key name for comparing values. You can pass any of 'title' or 'uri'.
 
 The default value is 'title'.
 
+#### --from, -f
+
+Start to search from this number of the search ranking.
+
+
 ### rank
 
 Print a record of the search result at a particular rank order in the search ranking.

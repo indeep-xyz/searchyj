@@ -26,6 +26,16 @@ module SearchYJ
     OpenUriError = Class.new(StandardError)
 
     # Initialize myself.
+    # @param encoding [String]
+    #   The character encoding that is used to parse HTML
+    # @param from [Integer]
+    #   Start to search from this number of the search ranking
+    # @param sleep_time [Integer]
+    #   The time of sleep after fetching from internet
+    # @param limit_loop [Integer]
+    #   The number of limit that is connectable in one process
+    # @param user_agent [String]
+    #   Specify the user agent when open uri
     def initialize(
         encoding:   ENCODING,
         from:       1,
