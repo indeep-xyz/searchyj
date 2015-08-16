@@ -10,23 +10,23 @@ module SearchYJ
         default: 1,
         aliases: '-f',
         desc: \
-            'Start to search from this number of the search ranking'
+            'The searching process starts ' \
+            'from this number of the search ranking.'
 
     desc 'detect',
-         "Detect a first record that\n" \
-         'meet the conditions of a regexp and a key.'
+         "Get the record matched first with the option value."
     option :regexp,
            type:     :string,
            required: true,
            aliases:  '-r',
-           desc:     'Regexp that want to match with value of a record'
+           desc:     'Regexp to extract from the search result.'
     option :key,
            type:    :string,
            default: 'title',
            aliases: '-k',
            desc: \
-               'The key name for comparing values. ' \
-               'You can pass any of \'title\' or \'uri\'. '
+               "The key name of the matching target\n" \
+               "This option receives any of 'title' or 'uri'."
     def detect(term)
       opt    = symbolized_options
       key    = opt.delete(:key)
@@ -38,7 +38,7 @@ module SearchYJ
     end
 
     desc 'list',
-         'Get records of the search result.'
+         'Print the search result.'
     option :size,
            type:    :numeric,
            default: 10,
@@ -54,11 +54,11 @@ module SearchYJ
     end
 
     desc 'rank',
-         "Get a record in the search result\n" \
-         'at a particular rank order in the search ranking.'
+         "Print a particular record extracted " \
+         "from the search result by the number of rank order."
     option :rank,
            type:     :numeric,
-           required: true,
+           default:  1,
            aliases:  '-r',
            desc:     'The rank order in the search ranking'
     def rank(term)
