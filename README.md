@@ -54,7 +54,7 @@ The searching process starts from this number of the search ranking.
 
 ### detect
 
-Print the record matched first with the search term.
+Get the record matched first with the option value.
 
     $ searchyj detect [options] <SearchTerm>
 
@@ -62,9 +62,9 @@ If the matching record is none, SearchYJ print a _null_ in the form of string.
 
 #### --regexp, -r
 
-This value is a regular expression used to extract from the search result. The matching target in the parameters is depended on the value of _--key_ option.
+This value is a regular expression to extract from the search result. The matching target in the parameters is depended on the value of _--key_ option.
 
-This option is required.
+The value is required.
 
 #### --key, -k
 
@@ -88,7 +88,7 @@ If the matching record is none, SearchYJ print a _null_ in the form of string.
 
 This value is the number of rank order in the search result.
 
-This option is required.
+The default value is _1_.
 
 ## Usage (Programming)
 
