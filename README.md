@@ -1,15 +1,15 @@
-SearchYJ
-====
+# SearchYJ
 
 Search on Yahoo Japan.
 
-## Installation
+Installation
+----
 
 Add this line to your application's Gemfile:
 
-```ruby
+~~~ruby
 gem 'searchyj'
-```
+~~~
 
 And then execute:
 
@@ -21,90 +21,78 @@ Or install it yourself as:
 
 ## Usage (CLI)
 
-The output format is generally JSON.
-
-It has parameters the followings.
+The format of the search result is JSON which includes parameters the followings.
 
 - uri
-  - The URI of the web site。
-
-
 - title
-  - The title of the web site.
-  - The title might be abbreviation.
-
-
+  - The title might be abbreviated because its source string is from the list of the search result.
 - rank
-  - The rank order in the search ranking.
-  - This number might have a slight error. As a reason for that, SearchYJ pick up the records which has excepted the advertisements in the search result. The exception feature is rough machining yet.
-
+  - The number of the rank order in the search result.
+  - This number might have a slight error. The records collected by SearchYJ is excepted some advertisements from the search result. The feature of exception is rough yet.
 
 ### list
 
-Print the search results that has collected the ordered number.
+Print the search result.
 
     $ searchyj list [options] <SearchTerm>
 
-If the search result was nothing, print a string of an empty Array.
+If the number of the result is none, SearchYJ print an empty array in the form of string.
 
 #### --size, -s
 
-The size of the result records.
+This number is the size of the result records.
 
-If a number of the search result is less than this option's value, search for next page until the sum of the results reach to option's value.
+SearchYJ continues searching and to collecting records until the sum of the records reach the size value.
 
-If reach the end of searching before reach to option's value, print the collected records at that time.
+If searching is over or become unable to get new records, before reach the size value, SearchYJ print the collected records at that time.
 
 The default value is 10.
 
-
 #### --from, -f
 
-Start to search from this number of the search ranking.
-
+The searching process starts from this number of the search ranking.
 
 ### detect
 
-Print a record of the search result that has matched own arguments.
+Print the record matched first with the search term.
 
     $ searchyj detect [options] <SearchTerm>
 
-If the search result was nothing or did not find, print a string of null.
+If the matching record is none, SearchYJ print a _null_ in the form of string.
 
 #### --regexp, -r
 
-A string as a regular expression that want to match with value of a record[key].
+This value is a regular expression used to extract from the search result. The matching target in the parameters is depended on the value of _--key_ option.
 
-The option is required.
+This option is required.
 
 #### --key, -k
 
-The key name for comparing values. You can pass any of 'title' or 'uri'. 
+This value is the name of the matching target which a key name of parameters in records. This option receives any of _title_ or _uri_.
 
-The default value is 'title'.
+The default value is _title_.
 
 #### --from, -f
 
-Start to search from this number of the search ranking.
-
+The searching process starts from this number of the search ranking.
 
 ### rank
 
-Print a record of the search result at a particular rank order in the search ranking.
+Print a particular record extracted from the search result by the number of rank order.
 
     $ searchyj rank [options] <SearchTerm>
 
-If the search result was nothing or did not find, print a string of null.
+If the matching record is none, SearchYJ print a _null_ in the form of string.
 
 #### --rank, -r
 
-The rank order in the search ranking.
+This value is the number of rank order in the search result.
 
-The option is required.
+This option is required.
 
 ## Usage (Programming)
 
-Please read 'lib/searchyj.rb' and others.
+Please read _lib/searchyj.rb_ and others.
 
 ## Author
 
